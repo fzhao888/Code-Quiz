@@ -5,13 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
 <body>
-    <p> Welcome to the Coding Quiz! </p>
-    <a href="./assets/html/Question 1.html">
-        <button class="Start Quiz">Start Quiz</button>
-    </a>
+    <div class="welcome-card" id="welcome">
+        <p> Welcome to the Coding Quiz! </p>
+         <button class="start-button">Start Quiz</button>
+    </div>
+
+    <div class="time-card">
+            <h3>Time Left: </h3>
+            <div class="timer-count">120</div>
+    </div>  
+   
+    <div class="question-card" id="questions">
+       <h2 id="question"></h2> 
+        <ol>
+            <li>
+                <button id="a"></button>
+            </li>
+    
+            <li>
+                <button id="b"></button>
+            </li>
+    
+            <li>
+                <button id="c"> </button>
+            </li>
+    
+            <li>
+                <button id="d"></button>
+            </li> 
+        </ol>
+    </div>
+
+    <div class="enter-initials" id="initials">
+        <h2> Enter Initials </h2>
+        <h3>Enter Initials Box</h3>
+
+        <button class="try-again">Try Again</button>
+    </div>
+
+    <div class="highscores" id="highscores">
+
+    </div>
 
     <script src="script.js"></script>
 </body>
