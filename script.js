@@ -9,6 +9,7 @@ var done = false; //tracks if timer is 0s or all questions have been answered
 
 var startButton = document.querySelector(".start-button"); 
 var submitButton = document.getElementById("submit"); 
+var resetButton = document.getElementById("reset");
 var timerElement = document.querySelector(".timer-count"); 
 var studentName = document.getElementById("initials-hs"); 
 var displayScores = document.getElementById("display-highscore");
@@ -128,12 +129,29 @@ function checkAnswer(){
     if(choicePicked === correctAnswer){
         questionNumber++; 
         if(questionNumber === questions.length){
-            done = true;
-            console.log("done");
+            done = true; 
         }
     }else{
         timeLeft -= 10; 
     } 
+}
+
+function renderScore(){
+    var scores = JSON.parse(localStorage.getItem("scores"));
+    if(scores === null){
+        return;
+    }
+    
+    scores.sort(function(a,b){
+        return b.score - a.score;
+    });
+    
+    displayScores.textContent = "";
+    for(var i=0; i<5;i++){ 
+        var scoreEl = document.createElement("li");  
+        scoreEl.textContent = scores[i].name + " " + scores[i].score;
+        displayScores.appendChild(scoreEl);
+    }
 }
 
 startButton.addEventListener("click",startQuiz);
@@ -159,46 +177,37 @@ d.addEventListener("click",function(){
 });
 
 submitButton.addEventListener("click", function(event){
-    event.preventDefault(); 
+    event.preventDefault();  
 
     var student = {
         name: studentName.value,
         score: timeLeft
     }
  
-    yourScoreEl.textContent = student.name + " " + student.score;
-      
+    yourScoreEl.textContent = student.name + " " + student.score;      
 
     var scores = JSON.parse(localStorage.getItem("scores"));
     if(scores === null){
         scores = [];
     } 
-
-
-    if(scores.length === 0){ 
-        scores.push(student);
-        return localStorage.setItem("scores",JSON.stringify(scores));
+    //checks for duplicate entries
+    if(scores.length > 0){
+        for(var i = 0; i<scores.length;i++){
+            if( (scores[i].name === student.name) && (scores[i].score === student.score)){
+                renderScore();
+                return;
+            }
+        }
     }
-
     scores.push(student);
     localStorage.setItem("scores",JSON.stringify(scores));
+   
     renderScore();
 }); 
  
-function renderScore(){
-    var scores = JSON.parse(localStorage.getItem("scores"));
-    if(scores === null){
-        return;
-    }
-    
-    scores.sort(function(a,b){
-        return b.score - a.score;
-    });
-    
-    for(var i=0; i<5;i++){ 
-        var scoreEl = document.createElement("li");  
-        scoreEl.textContent = scores[i].name + " " + scores[i].score;
-        displayScores.appendChild(scoreEl);
-    }
-}
+resetButton.addEventListener("click", function(event){
+    event.preventDefault();
+    localStorage.clear();
+    displayScores.textContent = "";
+});
  
