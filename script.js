@@ -8,15 +8,20 @@ var done = false; //tracks if timer is 0s or all questions have been answered
 
 
 var startButton = document.querySelector(".start-button"); 
-var timerElement = document.querySelector(".timer-count");
+var submitButton = document.getElementById("submit"); 
+var timerElement = document.querySelector(".timer-count"); 
+var studentName = document.getElementById("initials-hs"); 
+var displayScores = document.getElementById("display-highscore");
+var yourScoreEl = document.getElementById("yourscore");
 var a = document.getElementById("a");
 var b = document.getElementById("b");
 var c = document.getElementById("c");
 var d = document.getElementById("d");
-var question = document.getElementById("question");  
+var questionEl = document.getElementById("question");  
 var questionNumber = 0;
 var correctAnswer = "";
 var choicePicked = "";
+var done = false;
 
 var timer;
 var timeLeft;
@@ -44,8 +49,26 @@ var questions = [
         c: "function:myFunction()",
         d: "myFunction()",
         answer: "b"
-    } 
-]
+    },
+
+    {
+        question: "What is the correct way to write a JavaScript array?",
+        a: "var colors = 1 = (\"red\"), 2 = (\"green\"), 3 = (\"blue\")  ",
+        b: "var colors = [\"red\", \"green\", \"blue\"]",
+        c: "var colors = (1:\"red\", 2:\"green\", 3:\"blue\")",
+        d: "var colors = \"red\", \"green\", \"blue\"",
+        answer: "b"
+    },
+
+    {
+        question: "How does a FOR loop start?",
+        a: "for (i = 0; i <= 5)",
+        b: "for (i <= 5; i++)",
+        c: "for i = 1 to 5",
+        d: "for (i = 0; i <= 5; i++)",
+        answer: "d"
+    }
+];
 
 function init(){
    document.getElementById("questions").style.display = "none";
@@ -64,10 +87,17 @@ function startTimer(){
     timeLeft = 120;
     showQuiz();
     timer = setInterval(function() {
-        showQuiz();
-        timeLeft--;
-        timerElement.textContent = timeLeft;  
-        if(timeLeft === 0){
+        if(!done && timeLeft>0){
+            showQuiz();
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+        }  
+        
+        if(timeLeft <= 0 || done){
+            if(timeLeft < 0){
+                timeLeft = 0;
+                timerElement.textContent = 0;
+            }
             clearInterval(timer);
             endQuiz();
         }
@@ -77,56 +107,98 @@ function startTimer(){
 
 function showQuiz(){
     document.getElementById("questions").style.display = "block";
-    question.textContent = questions[questionNumber+1].question
-    a.textContent = questions[questionNumber+1].a;
-    b.textContent = questions[questionNumber+1].b;
-    c.textContent = questions[questionNumber+1].c;
-    d.textContent = questions[questionNumber+1].d;
-    correctAnswer = questions[questionNumber+1].answer;
+    questionEl.textContent = questions[questionNumber].question
+    a.textContent = questions[questionNumber].a;
+    b.textContent = questions[questionNumber].b;
+    c.textContent = questions[questionNumber].c;
+    d.textContent = questions[questionNumber].d;
+    correctAnswer = questions[questionNumber].answer;
 }
 
 
 function endQuiz(){
+    document.getElementById("questions").style.display = "none";
+    document.getElementById("initials").style.display = "block"; 
+    document.getElementById("highscores").style.display = "table";
+    renderScore();
+}
 
+
+function checkAnswer(){ 
+    if(choicePicked === correctAnswer){
+        questionNumber++; 
+        if(questionNumber === questions.length){
+            done = true;
+            console.log("done");
+        }
+    }else{
+        timeLeft -= 10; 
+    } 
 }
 
 startButton.addEventListener("click",startQuiz);
 
 a.addEventListener("click",function(){
     choicePicked = "a";
-    if(choicePicked === correctAnswer){
-
-    }else{
-        timeLeft -= 10;
-    }
+    checkAnswer();
 });
 
 b.addEventListener("click",function(){
     choicePicked = "b";
-    if(choicePicked === correctAnswer){
-
-    }else{
-        timeLeft -= 10;
-        timerElement.textContent = timeLeft;
-    }
+    checkAnswer();
 });
 
 c.addEventListener("click",function(){
     choicePicked = "c";
-    if(choicePicked === correctAnswer){
-
-    }else{
-        timeLeft -= 10;
-        timerElement.textContent = timeLeft;
-    }
+    checkAnswer();
 });
 
 d.addEventListener("click",function(){
     choicePicked = "d";
-    if(choicePicked === correctAnswer){
-
-    }else{
-        timeLeft -= 10;
-        timerElement.textContent = timeLeft;
-    }
+    checkAnswer();
 });
+
+submitButton.addEventListener("click", function(event){
+    event.preventDefault(); 
+
+    var student = {
+        name: studentName.value,
+        score: timeLeft
+    }
+ 
+    yourScoreEl.textContent = student.name + " " + student.score;
+      
+
+    var scores = JSON.parse(localStorage.getItem("scores"));
+    if(scores === null){
+        scores = [];
+    } 
+
+
+    if(scores.length === 0){ 
+        scores.push(student);
+        return localStorage.setItem("scores",JSON.stringify(scores));
+    }
+
+    scores.push(student);
+    localStorage.setItem("scores",JSON.stringify(scores));
+    renderScore();
+}); 
+ 
+function renderScore(){
+    var scores = JSON.parse(localStorage.getItem("scores"));
+    if(scores === null){
+        return;
+    }
+    
+    scores.sort(function(a,b){
+        return b.score - a.score;
+    });
+    
+    for(var i=0; i<5;i++){ 
+        var scoreEl = document.createElement("li");  
+        scoreEl.textContent = scores[i].name + " " + scores[i].score;
+        displayScores.appendChild(scoreEl);
+    }
+}
+ 
