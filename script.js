@@ -7,14 +7,16 @@ var done = false; //tracks if timer is 0s or all questions have been answered
 //saves high score and initials in local storage
 
 
-var startButton = document.querySelector(".start-button");
+var startButton = document.querySelector(".start-button"); 
 var timerElement = document.querySelector(".timer-count");
 var a = document.getElementById("a");
 var b = document.getElementById("b");
 var c = document.getElementById("c");
 var d = document.getElementById("d");
-var question = document.getElementById("question");
+var question = document.getElementById("question");  
 var questionNumber = 0;
+var correctAnswer = "";
+var choicePicked = "";
 
 var timer;
 var timeLeft;
@@ -51,6 +53,8 @@ function init(){
    document.getElementById("highscores").style.display = "none";
 }
 
+init();
+
 function startQuiz(){
     document.getElementById("welcome").style.display = "none";
     startTimer();
@@ -62,7 +66,7 @@ function startTimer(){
     timer = setInterval(function() {
         showQuiz();
         timeLeft--;
-        timerElement.textContent = timeLeft; 
+        timerElement.textContent = timeLeft;  
         if(timeLeft === 0){
             clearInterval(timer);
             endQuiz();
@@ -78,12 +82,51 @@ function showQuiz(){
     b.textContent = questions[questionNumber+1].b;
     c.textContent = questions[questionNumber+1].c;
     d.textContent = questions[questionNumber+1].d;
-    
+    correctAnswer = questions[questionNumber+1].answer;
 }
+
 
 function endQuiz(){
 
 }
 
-init();
 startButton.addEventListener("click",startQuiz);
+
+a.addEventListener("click",function(){
+    choicePicked = "a";
+    if(choicePicked === correctAnswer){
+
+    }else{
+        timeLeft -= 10;
+    }
+});
+
+b.addEventListener("click",function(){
+    choicePicked = "b";
+    if(choicePicked === correctAnswer){
+
+    }else{
+        timeLeft -= 10;
+        timerElement.textContent = timeLeft;
+    }
+});
+
+c.addEventListener("click",function(){
+    choicePicked = "c";
+    if(choicePicked === correctAnswer){
+
+    }else{
+        timeLeft -= 10;
+        timerElement.textContent = timeLeft;
+    }
+});
+
+d.addEventListener("click",function(){
+    choicePicked = "d";
+    if(choicePicked === correctAnswer){
+
+    }else{
+        timeLeft -= 10;
+        timerElement.textContent = timeLeft;
+    }
+});
