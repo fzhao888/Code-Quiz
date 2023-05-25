@@ -1,0 +1,80 @@
+
+body{
+    display:flex;  
+ }
+
+ header{
+    display: inline-flex;  
+ }
+
+ .welcome-card{ 
+    padding-left: 25%;
+    padding-top: 15%;
+ }
+
+ .welcome-card h2{ 
+    margin-left: 18%; 
+    display: inline;
+ }
+
+ button{
+    background-color: navy;
+    color: white;
+    border-radius: 6px;
+ }
+
+ .start-button{
+    margin-top: 5%;
+    margin-left: 50%;
+ }
+
+ .question-card{
+    display: flex;
+    flex-direction: column;
+    margin-left: 25%;
+    margin-top: 5%;
+    justify-content: center;
+ }
+
+ .question-card #question{ 
+    flex-wrap: wrap;
+    inline-size: 70%;
+ }
+
+ .choices-button{
+    margin-top:1%;
+ }
+
+ #result{
+    margin-left: 15%;
+    margin-top: 5%;
+ }
+
+ #initials{
+    margin-left: 35%;
+    margin-top: 15%;
+ }
+
+ #highscores{
+    margin-left: 35%;
+    margin-top: 15%;
+ }
+
+ #highscores h3{
+    background-color: yellow;
+ }
+
+ #yourscore{
+    color:white;
+    background-color: rgb(0, 128, 47);
+ }
+
+ #highscores ol{
+    border: 2px solid gray; 
+ }
+ 
+ #highscores li{ 
+    background-color: purple;
+    color: white;
+    border: 1px solid gray; 
+ }

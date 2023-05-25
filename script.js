@@ -8,12 +8,15 @@ var done = false; //tracks if timer is 0s or all questions have been answered
 
 
 var startButton = document.querySelector(".start-button"); 
+var tryagainButton = document.getElementById("try-again");
 var submitButton = document.getElementById("submit"); 
 var resetButton = document.getElementById("reset");
 var timerElement = document.querySelector(".timer-count"); 
 var studentName = document.getElementById("initials-hs"); 
+var enterInitialsEl = document.getElementById("initials");
 var displayScores = document.getElementById("display-highscore");
 var yourScoreEl = document.getElementById("yourscore");
+var resultEl = document.getElementById("result");
 var a = document.getElementById("a");
 var b = document.getElementById("b");
 var c = document.getElementById("c");
@@ -85,7 +88,7 @@ function startQuiz(){
 }
 
 function startTimer(){
-    timeLeft = 120;
+    timeLeft = 5;
     showQuiz();
     timer = setInterval(function() {
         if(!done && timeLeft>0){
@@ -95,6 +98,8 @@ function startTimer(){
         }  
         
         if(timeLeft <= 0 || done){
+            resultEl.textContent = "";
+
             if(timeLeft < 0){
                 timeLeft = 0;
                 timerElement.textContent = 0;
@@ -118,25 +123,31 @@ function showQuiz(){
 
 
 function endQuiz(){
-    document.getElementById("questions").style.display = "none";
-    document.getElementById("initials").style.display = "block"; 
-    document.getElementById("highscores").style.display = "table";
-    renderScore();
+    document.getElementById("questions").style.display = "none"; 
+    enterInitialsEl.style.display = "block";  
 }
 
 
 function checkAnswer(){ 
     if(choicePicked === correctAnswer){
         questionNumber++; 
+        resultEl.textContent = "Correct!";
+
+        setTimeout(function(){
+            resultEl.textContent = "";
+        },500);
+
         if(questionNumber === questions.length){
             done = true; 
         }
     }else{
-        timeLeft -= 10; 
+        timeLeft -= 10;
+        resultEl.textContent = "Wrong!"; 
     } 
 }
 
 function renderScore(){
+    var length;
     var scores = JSON.parse(localStorage.getItem("scores"));
     if(scores === null){
         return;
@@ -144,14 +155,22 @@ function renderScore(){
     
     scores.sort(function(a,b){
         return b.score - a.score;
-    });
+    }); 
     
     displayScores.textContent = "";
-    for(var i=0; i<5;i++){ 
+    
+    if(scores.length<5){
+        length = scores.length;
+    }else{
+        length = 5;
+    }
+    
+    for(var i=0; i<length;i++){ 
         var scoreEl = document.createElement("li");  
         scoreEl.textContent = scores[i].name + " " + scores[i].score;
         displayScores.appendChild(scoreEl);
     }
+    document.getElementById("highscores").style.display = "table"; 
 }
 
 startButton.addEventListener("click",startQuiz);
@@ -176,14 +195,21 @@ d.addEventListener("click",function(){
     checkAnswer();
 });
 
-submitButton.addEventListener("click", function(event){
-    event.preventDefault();  
-
+submitButton.addEventListener("click", function(event){ 
+    event.preventDefault();   
+    
     var student = {
         name: studentName.value,
         score: timeLeft
-    }
- 
+    };
+
+    if(student.name.trim().length === 0){
+        window.alert("You have entered a blank name. Please try again!");
+        return;
+    } 
+     
+    
+    enterInitialsEl.style.display = "none";
     yourScoreEl.textContent = student.name + " " + student.score;      
 
     var scores = JSON.parse(localStorage.getItem("scores"));
@@ -201,13 +227,17 @@ submitButton.addEventListener("click", function(event){
     }
     scores.push(student);
     localStorage.setItem("scores",JSON.stringify(scores));
-   
-    renderScore();
+    renderScore(); 
 }); 
+
  
 resetButton.addEventListener("click", function(event){
     event.preventDefault();
     localStorage.clear();
     displayScores.textContent = "";
+});
+
+tryagainButton.addEventListener("click",function(event){
+    location.reload();
 });
  
