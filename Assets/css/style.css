@@ -21,6 +21,11 @@ body{
     background-color: navy;
     color: white;
     border-radius: 6px;
+    font-size: 24px;
+ }
+
+ button:hover{
+    background-color: blueviolet;
  }
 
  .start-button{
@@ -50,31 +55,36 @@ body{
     margin-top: 5%;
  }
 
- #initials{
+ #initials-card{
     margin-left: 35%;
     margin-top: 15%;
  }
 
- #highscores{
+ #highscore{
     margin-left: 35%;
     margin-top: 15%;
  }
 
- #highscores h3{
+ #highscore h3{
     background-color: yellow;
+    border: 1px solid black;
  }
 
  #yourscore{
     color:white;
     background-color: rgb(0, 128, 47);
  }
+ 
+ #yourscore h3{ 
+    border: 1px solid black;
+ }
 
- #highscores ol{
-    border: 2px solid gray; 
+ #highscore ol{
+    border: 2px solid black; 
  }
  
- #highscores li{ 
+ #highscore li{ 
     background-color: purple;
     color: white;
-    border: 1px solid gray; 
+    border: 1px solid black; 
  }
