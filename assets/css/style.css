@@ -1,240 +1,104 @@
-
-body{
-    display:flex;  
- }
-
- header{
-    display: inline-flex;  
- }
-
- .time-card{
-   display: inline; 
-   white-space: nowrap;
-   padding-right: 20px;
+body {
+   margin: 1%;
+   padding: 1%;
+   min-height: 100%;
 }
 
- .welcome-card{ 
-    display: inline;
-    padding-left: 25%;
-    padding-top: 15%;
-    font-size: 24px;
-    text-align: center;
- }
+header {
 
- .welcome-card h2{ 
-    margin-left: 25%;   
-    justify-content: center;
-    align-items: center;
-    text-align: center;
- }
+   width: 100%;
+   height: 5%;
+}
 
- .welcome-card button{   
-   width: 50%;
-   margin-left: 25%;
+.wrapper {
+   display: flex;
+   min-height: 100vh;
    justify-content: center;
    align-items: center;
 }
 
- button{
-    background-color: navy;
-    color: white;
-    border-radius: 6px; 
-    font-size: 24px;
- }
+.container {
+   display: flex;
+   flex: 1 0 100%;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+   font-size: 24px;
+}
 
- button:hover{
-    background-color: blueviolet;
- }
+.container h2 {
+   flex: 1 0 100%;
+   margin: 5px;
+   align-items: stretch;
+   text-align: center;
+}
 
- .start-button{
-    margin-top: 5%;
-    margin-left: 50%;
- }
+.time-card {
+   display: flex;
+   white-space: nowrap;
 
- .question-card{
-    display: flex;
-    flex-direction: column;
-    margin-left: 22%;
-    margin-top: 5%;
-    justify-content: center;
- }
+}
 
- .question-card #question{ 
-    flex-wrap: wrap;
-    inline-size: 70%;
- }
+button {
+   background-color: navy;
+   color: white;
+   border-radius: 6px;
+   font-size: 24px;
+}
 
- .choices-button{
-    margin-top:1%; 
- }
+button:hover {
+   background-color: blueviolet;
+}
 
- .choices-button button{
+
+.choices-button {
+   margin-top: 1%;
+}
+
+.choices-button button {
    width: 100%;
- }
+   padding: 5px;
+}
 
- #result{
-    margin-left: 20%;
-    margin-top: 5%;
-    font-size: 24px;
- }
+#result {
+   font-size: 24px;
+   text-align: center;
+   padding: 5px;
+}
 
- #initials-card{
-    margin-left: 25%;
-    margin-top: 15%;
- }
+.enter-initials-card{
+   font-size:20px;
+}
 
- #highscore{
-    margin-left: 25%;
-    margin-top: 15%;
- }
+.enter-initials-card form{
+   align-items: center;
+}
+   
 
- #highscore h3{
-    background-color: yellow;
-    border: 1px solid black;
- }
+#highscore {
+   text-align: center;
+}
 
- #yourscore{
-    color:white;
-    background-color: rgb(0, 128, 47);
- }
- 
- #yourscore h3{ 
-    border: 1px solid black;
- }
+#highscore h3 {
+   background-color: yellow;
+   border: 1px solid black;
+}
 
- #highscore ol{
-    border: 2px solid black; 
- }
- 
- #highscore li{ 
-    background-color: purple;
-    color: white;
-    border: 1px solid black; 
- }
- @media (max-width: 1500px){
-   .welcome-card{
-      padding-left: 10%;  
-   } 
+#yourscore {
+   color: white;
+   background-color: rgb(0, 128, 47);
+}
 
-   .question-card{
-      font-size: 14px;
-      margin-left: 10%; 
-   } 
+#yourscore h3 {
+   border: 1px solid black;
+}
 
- }
+#highscore ol {
+   border: 2px solid black;
+}
 
- @media (max-width: 950px){ 
-   .welcome-card{
-      padding-left: 0%; 
-      margin-right: 20%;
-   } 
-
-   .start-button{
-      font-size: 22px;
-      width: 50%;
-   }
-
-   .question-card{
-      font-size: 14px;
-      margin-left: 10%; 
-   } 
-
-   .choices-button button{
-      font-size: 20px;
-      width: 50%;
-   }
-
-   #initials-card button{
-      font-size: 20px;
-   }
-
-   #highscore button{
-      font-size: 20px;
-   }
- }
-
- @media (max-width: 700px) { 
-   .welcome-card{ 
-      padding-left: 2%;  
-   } 
-
-   .start-button{ 
-      margin-left: 15%;
-      font-size:18px;
-      width: 50%;
-      text-align: center;
-   }
-
-   .question-card{
-      padding-left: 2% ;
-   }
-
-   .choices-button button{
-      font-size: 18px;
-      width: 50%
-   }
-
-   #initials-card{
-      position: absolute;
-      padding-left: 0%;
-      margin-right: 25%;
-   }
-
-   #initials-card button{
-      font-size: 14px;
-      padding-left: 2%;
-   }
-
-   #highscore{
-      position: absolute;
-      margin-right: 25%;
-   }
-
-   #highscore button{
-      font-size: 12px;
-   }
- }
-
- @media (max-width: 450px){
-   .welcome-card{ 
-      font-size: 14px;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      margin-right: 25%;
-      margin-left: 0;
-   }
-
-   .start-button{
-      margin-left: 5%;
-      font-size:18px;
-      width: 50%;
-      text-align: center;
-   }
-
-   .choices-button button{
-      font-size: 14px; 
-      width: 50%;
-   }
-
-   #initials-card{
-      padding-left: 0px; 
-      margin-right: 25%;
-      position: absolute;
-   } 
-
-   #initials-card button{
-      font-size: 14px;
-      padding-left: 2%;
-   }
-
-   #highscore{
-      position: absolute;
-      margin-right: 25%;
-   }
-
-   #highscore button{
-      font-size: 12px;
-   }
- }
- 
+#highscore li {
+   background-color: purple;
+   color: white;
+   border: 1px solid black;
+}

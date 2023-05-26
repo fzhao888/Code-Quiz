@@ -124,7 +124,7 @@ function startTimer(){
 
 //displays questions
 function showQuiz(){
-    questionsCard.style.display = "block";
+    questionsCard.style.display = "flex";
     questionEl.textContent = questions[questionNumber].question
     a.textContent = questions[questionNumber].a;
     b.textContent = questions[questionNumber].b;
@@ -136,7 +136,7 @@ function showQuiz(){
 //ends quiz
 function endQuiz(){
     questionsCard.style.display = "none"; 
-    enterInitialsEl.style.display = "block";  
+    enterInitialsEl.style.display = "flex";  
 }
 
 //checks if answer is correct or wrong and displays it

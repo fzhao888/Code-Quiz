@@ -18,7 +18,10 @@ Here is a screenshot of the website:
 ![screenshot of website](assets/images/fzhao888.github.io_Code-Quiz_.png)
 
 ## Credits
-Shoutout to TA Chris for helping me set up the high scores.  Chris assisted me with how to display high scores by adding in list items and the sort function.  In addition, shoutout to TA Jessica for helping me setup the HTML and getting me started.  Jessica gave me the idea to use an array where each object stored the question, choices, and answer. 
+
+HUGE shoutout to TA Chris! Chris assisted me with how to display high scores by adding in list items and the sort function.  He also helped me A TON with the css styling, as that as the part that took the longest and most confusing.  
+
+Shoutout to TA Jessica for helping me setup the HTML and getting me started.  Jessica gave me the idea to use an array where each object stored the question, choices, and answer. 
 
 ## License
 
