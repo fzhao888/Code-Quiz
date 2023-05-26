@@ -1,4 +1,4 @@
-# CodeQuiz
+# Code Quiz
 
 ## Description
 
